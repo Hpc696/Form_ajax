@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>FormAjax</title>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
+        
+    </head>
+    <body>
+        <script>
+        function submitForm() {
+            $.ajax({
+                url: '/addName',
+                type: 'POST',
+                //headers: headers,
+                data: {
+                    "Fname": $("#FName").val(),
+                    "Lname": $("#LName").val(),
+                    "email": $("#email").val()
+                },
+                success: function(result) {
+                    //append result to your html
+                    //Dynamic view
+                    $("#form1").hide();
+                    var html = '<div><span>First Name: ' + result.fName + '</span><span>Last Name: ' + result.lName + '</span></div>';
+                    $("#showValue").html(html);    
+                },
+                error: function (error) {
+                    alert('error ',error);
+                }
+            });
+        } </script>
+        <div>   
+            <div>
+            <form id="form1">
+                <label>Please enter below details</label><br><br>
+                <label>First Name *: </label><input id="FName" type="text" name="FName"/><br><br>
+                <label>Last Name *: </label><input id="LName" type="text" name="LName"/><br><br>         
+                <label>Email Address *: </label><input type="email" name="email"><br><br>
+                <br><br>
+                <input type="button" value="Submit" onClick=submitForm()>
+            </form>
+            <div id="showValue"></div>
+            </div>
+        </div>
+    </body>
+</html>
